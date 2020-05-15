@@ -58,7 +58,7 @@ open class BeaconsActivity : FlutterActivity() {
     override fun onResume() {
         super.onResume()
 
-        checkPermissions(this, ::isPermissionGranted)
+        // checkPermissions(this, ::isPermissionGranted)
 
         //Stop Background service, app is in foreground
         BeaconsPlugin.stopBackgroundService(this)
