@@ -1,7 +1,5 @@
 package com.umair.beacons_plugin
 
-import android.Manifest
-import android.app.Activity
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.Service
@@ -9,15 +7,15 @@ import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothManager
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.PowerManager
 import androidx.core.app.NotificationCompat
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.rxkotlin.subscribeBy
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.concurrent.TimeUnit
+
+val PREF_PERMISSION_DIALOG_SHOWN = "dialog_shown"
 
 private fun PackageManager.missingSystemFeature(name: String): Boolean = !hasSystemFeature(name)
 
@@ -45,28 +43,8 @@ fun isBluetoothEnabled(content: Context) {
 
     setUpBlueToothAdapter(content)?.takeIf { it.isDisabled }?.apply {
         val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+        enableBtIntent.addFlags(FLAG_ACTIVITY_NEW_TASK)
         content.startActivity(enableBtIntent)
-    }
-}
-
-fun checkPermissions(activity: Activity, isGranted: () -> Unit) {
-
-    try {
-        //Request for storage permissions
-        PermissionsHelper.requestLocationPermissions(activity)
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .debounce(1, TimeUnit.SECONDS, AndroidSchedulers.mainThread())
-                .subscribeBy(
-                        onNext = { callback ->
-                            isGranted.invoke()
-                        },
-                        onError = {
-                            it.printStackTrace()
-                        }
-                )
-    } catch (e: Exception) {
-        e.printStackTrace()
     }
 }
 
@@ -129,7 +107,14 @@ fun Service.acquireWakeLock(intent: Intent?, wakeLockTAG: String) {
     }
 }
 
-fun isLocationPermissionGranted(context: Context): Boolean {
-    return (PermissionsHelper.isPermissionGranted(context, Manifest.permission.ACCESS_FINE_LOCATION)
-            || PermissionsHelper.isPermissionGranted(context, Manifest.permission.ACCESS_COARSE_LOCATION))
+fun isPermissionDialogShown(): Boolean {
+    return BeaconPreferences.getInstance().getBoolean(PREF_PERMISSION_DIALOG_SHOWN, false)
+}
+
+fun setPermissionDialogShown() {
+    BeaconPreferences.getInstance().save(PREF_PERMISSION_DIALOG_SHOWN, true)
+}
+
+fun clearPermissionDialogShownFlag() {
+    BeaconPreferences.getInstance().save(PREF_PERMISSION_DIALOG_SHOWN, false)
 }

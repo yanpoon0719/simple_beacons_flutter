@@ -31,7 +31,7 @@ open class BeaconHelper(var context: Context) : BeaconConsumer, BeaconsPlugin.Co
     companion object {
 
         @JvmStatic
-        private val listOfRegions = arrayListOf<Region>()
+        private var listOfRegions = arrayListOf<Region>()
     }
 
     private val TAG = "BeaconHelper"
@@ -152,12 +152,12 @@ open class BeaconHelper(var context: Context) : BeaconConsumer, BeaconsPlugin.Co
             beaconManager?.startRangingBeaconsInRegion(region)
         } catch (e: RemoteException) {
             e.printStackTrace()
-            Log.e(TAG, e.message)
+            Log.e(TAG, e.message.toString())
         }
     }
 
     private fun setUpBeaconManager(context: Context) {
-        if (isLocationPermissionGranted(context)) {
+        if (BeaconsPlugin.permissionsGranted(context)) {
 
             Log.i(TAG, "setUpBeaconManager")
             beaconManager = BeaconManager.getInstanceForApplication(context)
@@ -189,6 +189,13 @@ open class BeaconHelper(var context: Context) : BeaconConsumer, BeaconsPlugin.Co
 
         result.success("Region Added: ${region.uniqueId}, UUID: ${region.id1}")
         Log.i(TAG, "Region Added: ${region.uniqueId}, UUID: ${region.id1}")
+    }
+
+    override fun clearRegions(call: MethodCall, result: MethodChannel.Result) {
+        listOfRegions = arrayListOf<Region>()
+
+        result.success("Regions Cleared")
+        Log.i(TAG, "Regions Cleared")
     }
 
     override fun startScanning() {
