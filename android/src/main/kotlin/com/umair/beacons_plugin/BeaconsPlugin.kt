@@ -190,7 +190,7 @@ class BeaconsPlugin : FlutterPlugin, ActivityAware, PluginRegistry.RequestPermis
             if (areBackgroundScanPermissionsGranted()) {
                 requestLocationPermissions()
             } else {
-                requestBackgroundPermission()
+                // requestBackgroundPermission()
             }
         }
 
