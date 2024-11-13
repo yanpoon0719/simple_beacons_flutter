@@ -36,12 +36,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b7b9ec39-f1d6-4277-a85a-8c6c793e0ff7" name="Default Changelist" comment="Released v1.18&#10;&#10;- (Android) Removed ACCESS_BACKGROUND_LOCATION permission from plugin to prevent App Rejection&#10;- (iOS) Removed UIBackgroundModes key from info.pList from Plugin to prevent App Rejection">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/umair/beacons_plugin/BeaconHelper.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/umair/beacons_plugin/BeaconHelper.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/umair/beacons_plugin/BeaconsPlugin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/umair/beacons_plugin/BeaconsPlugin.kt" afterDir="false" />
-    </list>
+    <list default="true" id="b7b9ec39-f1d6-4277-a85a-8c6c793e0ff7" name="Default Changelist" comment="Released v1.18&#10;&#10;- (Android) Removed ACCESS_BACKGROUND_LOCATION permission from plugin to prevent App Rejection&#10;- (iOS) Removed UIBackgroundModes key from info.pList from Plugin to prevent App Rejection" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
