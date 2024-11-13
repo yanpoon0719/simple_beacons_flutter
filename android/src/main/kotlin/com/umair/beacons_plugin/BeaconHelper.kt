@@ -22,7 +22,7 @@ open class BeaconHelper(var context: Context) : BeaconConsumer, BeaconsPlugin.Co
         context.unbindService(p0)
     }
 
-    override fun bindService(p0: Intent?, p1: ServiceConnection, p2: Int): Boolean {
+    override fun bindService(p0: Intent, p1: ServiceConnection, p2: Int): Boolean {
         return context.bindService(p0, p1, p2)
     }
 

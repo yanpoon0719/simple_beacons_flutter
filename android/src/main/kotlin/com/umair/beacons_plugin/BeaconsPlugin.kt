@@ -177,7 +177,7 @@ class BeaconsPlugin : FlutterPlugin, ActivityAware, PluginRegistry.RequestPermis
             Timber.i("doIfPermissionsGranted")
 
             if (beaconHelper == null) {
-                Timber.i(String.format("doIfPermissionsGranted, %s", "Unable to start beacons plugin service."))
+                Timber.i("doIfPermissionsGranted, Unable to start beacons plugin service.");
                 return
             }
 
@@ -196,7 +196,7 @@ class BeaconsPlugin : FlutterPlugin, ActivityAware, PluginRegistry.RequestPermis
 
         private fun requestLocationPermissions() {
             if (!arePermissionsGranted()) {
-                Timber.i(String.format("requestLocationPermissions, %s", "Requesting location permissions.."))
+                Timber.i("requestLocationPermissions, Requesting location permissions..")
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                         currentActivity?.let {
@@ -207,7 +207,7 @@ class BeaconsPlugin : FlutterPlugin, ActivityAware, PluginRegistry.RequestPermis
                             ActivityCompat.requestPermissions(it, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION), REQUEST_LOCATION_PERMISSIONS)
                         }
                     }
-                            ?: Timber.e(String.format("requestLocationPermissions, %s", "Unable to request location permissions."))
+                            ?: Timber.e("requestLocationPermissions, Unable to request location permissions.")
                 } else {
                     doIfPermissionsGranted()
                 }
@@ -222,7 +222,7 @@ class BeaconsPlugin : FlutterPlugin, ActivityAware, PluginRegistry.RequestPermis
                 currentActivity?.let {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                         //if (it.shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_BACKGROUND_LOCATION)) {
-                        Timber.i(String.format("requestBackgroundPermission, %s", "Requesting background location permissions.."))
+                        Timber.i("requestBackgroundPermission, Requesting background location permissions..")
                         val builder: AlertDialog.Builder = AlertDialog.Builder(it)
                         builder.setTitle(defaultPermissionDialogTitle)
                         builder.setMessage(defaultPermissionDialogMessage)
