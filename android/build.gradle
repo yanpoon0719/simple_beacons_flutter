@@ -32,6 +32,7 @@ android {
     }
     defaultConfig {
         minSdkVersion 18
+        targetSdkVersion 34
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     lintOptions {
